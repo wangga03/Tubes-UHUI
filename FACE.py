@@ -8,7 +8,7 @@ import imgaug.augmenters as iaa
 import sys
 import contextlib
 
-pkl_path = '/home/raspiuhui/Tubes-UHUI/HASIL_FACENET/knn_facenet_aug2.pkl'
+pkl_path = '/home/pi/Tubes-UHUI/HASIL_FACENET/knn_facenet_aug4.pkl'
 
 # --- Fungsi suppress stdout Keras ---
 @contextlib.contextmanager
@@ -36,7 +36,7 @@ else:
 
     X, y = [], []
 
-    base_dir = "/home/raspiuhui/Tubes-UHUI/dataset3"
+    base_dir = "/home/pi/Tubes-UHUI/dataset3"
 
     seq = iaa.Sequential([
         iaa.Fliplr(0.5),              
@@ -77,7 +77,7 @@ else:
     print("Model KNN telah dilatih & disimpan ke .pkl!")
 
 # --- Mulai webcam ---
-face_cascade = cv2.CascadeClassifier('/home/raspiuhui/Tubes-UHUI/haarcascade_frontalface_alt2.xml')
+face_cascade = cv2.CascadeClassifier('/home/pi/Tubes-UHUI/haarcascade_frontalface_alt2.xml')
 cap = cv2.VideoCapture(0)  # ganti index kamera jika perlu
 
 while True:
