@@ -8,7 +8,7 @@ import imgaug.augmenters as iaa
 import sys
 import contextlib
 
-pkl_path = '/home/raspiuhui/Tubes-UHUI/HASIL_FACENET/knn_facenet_aug2.pkl'
+pkl_path = '/home/wgg/Tubes_AI/HASIL_FACENET/knn_facenet_aug3.pkl'
 
 # --- Fungsi suppress stdout Keras ---
 @contextlib.contextmanager
@@ -36,7 +36,7 @@ else:
 
     X, y = [], []
 
-    base_dir = "/home/raspiuhui/Tubes-UHUI/dataset3"
+    base_dir = "/home/wgg/Tubes_AI/dataset2/train"
 
     seq = iaa.Sequential([
         iaa.Fliplr(0.5),              
@@ -77,8 +77,8 @@ else:
     print("Model KNN telah dilatih & disimpan ke .pkl!")
 
 # --- Mulai webcam ---
-face_cascade = cv2.CascadeClassifier('/home/raspiuhui/Tubes-UHUI/haarcascade_frontalface_alt2.xml')
-cap = cv2.VideoCapture(0)  # ganti index kamera jika perlu
+face_cascade = cv2.CascadeClassifier('/home/wgg/Tubes_AI/haarcascade_frontalface_alt2.xml')
+cap = cv2.VideoCapture(2)  # ganti index kamera jika perlu
 
 while True:
     ret, frame = cap.read()
@@ -104,7 +104,7 @@ while True:
                             cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
 
     # Update tampilan di window
-    # cv2.imshow("FaceNet + KNN", frame)
+    cv2.imshow("FaceNet + KNN", frame)
 
     # Menghapus buffer terminal, kemudian update teks
     print("\033c", end="")  # Membersihkan terminal
@@ -115,9 +115,9 @@ while True:
     elif pred is not None:
         print(f"\033[32m{pred}\033[0m", end="\r", flush=True)  # Green text
 
-    # # Stop dengan 'q'
-    # if cv2.waitKey(1) & 0xFF == ord('q'):
-    #     break
+    # Stop dengan 'q'
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 
 cap.release()
 cv2.destroyAllWindows()
