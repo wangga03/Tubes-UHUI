@@ -8,7 +8,7 @@ import pickle
 embedder = FaceNet()
 X, y = [], []
 
-base_dir = "/home/wgg/Tubes_AI/dataset3"
+base_dir = "/home/raspiuhui/Tubes-UHUI/dataset3"
 
 # Augmentasi ringan (flip horizontal, rotasi kecil, brightness, blur kecil)
 seq = iaa.Sequential([
@@ -48,7 +48,7 @@ knn = KNeighborsClassifier(n_neighbors=3, metric='euclidean')
 knn.fit(X, y)
 
 # Simpan ke file .pkl
-with open('/home/wgg/Tubes_AI/HASIL_FACENET/knn_facenet_aug2.pkl', 'wb') as f:
+with open('/home/raspiuhui/Tubes-UHUI/HASIL_FACENET/knn_facenet_aug4.pkl', 'wb') as f:
     pickle.dump(knn, f)
 
 print("Model KNN FaceNet (dengan augmentasi) berhasil disimpan!")

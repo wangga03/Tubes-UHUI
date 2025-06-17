@@ -8,7 +8,7 @@ import imgaug.augmenters as iaa
 import sys
 import contextlib
 
-pkl_path = '/home/wgg/Tubes_AI/HASIL_FACENET/knn_facenet_aug3.pkl'
+pkl_path = '/home/raspiuhui/Tubes-UHUI/HASIL_FACENET/knn_facenet_aug2.pkl'
 
 # --- Fungsi suppress stdout Keras ---
 @contextlib.contextmanager
@@ -36,7 +36,7 @@ else:
 
     X, y = [], []
 
-    base_dir = "/home/wgg/Tubes_AI/dataset2/train"
+    base_dir = "/home/raspiuhui/Tubes-UHUI/dataset3"
 
     seq = iaa.Sequential([
         iaa.Fliplr(0.5),              
@@ -78,7 +78,7 @@ else:
 
 # --- Mulai webcam ---
 face_cascade = cv2.CascadeClassifier('/home/wgg/Tubes_AI/haarcascade_frontalface_alt2.xml')
-cap = cv2.VideoCapture(2)  # ganti index kamera jika perlu
+cap = cv2.VideoCapture(0)  # ganti index kamera jika perlu
 
 while True:
     ret, frame = cap.read()
@@ -96,14 +96,19 @@ while True:
                 emb = embedder.embeddings([img_rgb])[0]
             pred = knn.predict([emb])[0]
             conf = knn.predict_proba([emb]).max()
-            color = (0,255,0) if pred != 'jawa' else (0,0,255)
+            color = (0,255,0) if pred != 'oranglain' else (0,0,255)
             cv2.rectangle(frame, (x, y), (x+w, y+h), color, 2)
             cv2.putText(frame, f"{pred} ({conf:.2f})", (x, y-10),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
 
-    cv2.imshow("FaceNet + KNN", frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    # cv2.imshow("FaceNet + KNN", frame)
+    # if cv2.waitKey(1) & 0xFF == ord('q'):
+    #     break''
+
+    if pred == 'orang lain' :
+        print(f"\033[31m{pred}\033[0m")
+    else :
+        print(f"\033[32m{pred}\033[0m")
 
 cap.release()
 cv2.destroyAllWindows()
