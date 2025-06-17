@@ -1,6 +1,6 @@
 import gpiod
 import time
-
+#alskdj
 gpio_pin = 17  # Ganti jika kamu pakai pin lain
 
 chip = gpiod.Chip("gpiochip4")
