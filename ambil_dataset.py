@@ -2,10 +2,10 @@ import cv2
 import os
 
 # Load Haar Cascade untuk deteksi wajah
-face_cascade = cv2.CascadeClassifier('/home/wgg/Tubes_AI/haarcascade_frontalface_alt2.xml')
+face_cascade = cv2.CascadeClassifier('/home/cd/Tubes-UHUI/haarcascade_frontalface_alt2.xml')
 
 # Membuka kamera
-cap = cv2.VideoCapture(2)
+cap = cv2.VideoCapture(0)
 foto_ke = 1  # Untuk penamaan file hasil crop
 
 while True:
